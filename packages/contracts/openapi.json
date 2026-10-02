@@ -1,0 +1,753 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ABC-Salon API",
+    "description": "Phase 1: Jev-based message classification and a single booking-hours policy rule.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/classify": {
+      "post": {
+        "tags": [
+          "classify"
+        ],
+        "summary": "Classify",
+        "operationId": "classify_api_classify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClassifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassifyResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/branches": {
+      "get": {
+        "tags": [
+          "reference data"
+        ],
+        "summary": "List Branches",
+        "operationId": "list_branches_api_branches_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BranchOut"
+                  },
+                  "type": "array",
+                  "title": "Response List Branches Api Branches Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers": {
+      "get": {
+        "tags": [
+          "reference data"
+        ],
+        "summary": "List Customers",
+        "operationId": "list_customers_api_customers_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerOut"
+                  },
+                  "type": "array",
+                  "title": "Response List Customers Api Customers Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/interactions": {
+      "get": {
+        "tags": [
+          "reference data"
+        ],
+        "summary": "List Sample Interactions",
+        "description": "The sample messages the demo UI's message picker offers. Every one of\nthese has a matching replay fixture, so they work with no live Jev key.",
+        "operationId": "list_sample_interactions_api_interactions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SampleInteraction"
+                  },
+                  "type": "array",
+                  "title": "Response List Sample Interactions Api Interactions Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tasks": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "List Tasks",
+        "description": "The confirmed-booking board. Phase 1 has exactly one task type and\none status -- see docs/ABC-Salon_Architecture_Design.docx section 8.",
+        "operationId": "list_tasks_api_tasks_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TaskListItem"
+                  },
+                  "type": "array",
+                  "title": "Response List Tasks Api Tasks Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/export/decisions": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Export Decisions",
+        "description": "Used by `make eval` to read the audit trail without touching the\nlive database file directly (the Render disk is ephemeral anyway).",
+        "operationId": "export_decisions_api_export_decisions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Response Export Decisions Api Export Decisions Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BranchOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "openingHours": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openinghours"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "city",
+          "openingHours"
+        ],
+        "title": "BranchOut"
+      },
+      "ChoiceAnswer": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "choice",
+            "title": "Type",
+            "default": "choice"
+          },
+          "choice": {
+            "type": "string",
+            "title": "Choice"
+          },
+          "probabilities": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Probabilities"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "confidence_is_fallback": {
+            "type": "boolean",
+            "title": "Confidence Is Fallback",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "choice",
+          "probabilities",
+          "confidence"
+        ],
+        "title": "ChoiceAnswer"
+      },
+      "ClassifyRequest": {
+        "properties": {
+          "interactionId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interactionid"
+          },
+          "customerId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customerid"
+          },
+          "channel": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "phone_note",
+                  "web_form",
+                  "whatsapp_mock"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "title": "ClassifyRequest",
+        "description": "Either reference a seeded sample interaction by id, or supply free\ntext plus a customer id directly. Exactly one of the two forms."
+      },
+      "ClassifyResponse": {
+        "properties": {
+          "decisionId": {
+            "type": "string",
+            "title": "Decisionid"
+          },
+          "interactionId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interactionid"
+          },
+          "customerId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customerid"
+          },
+          "tier": {
+            "type": "string",
+            "title": "Tier"
+          },
+          "answers": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ChoiceAnswer"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreAnswer"
+                },
+                {
+                  "$ref": "#/components/schemas/NoulAnswer"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Answers"
+          },
+          "confidenceMap": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Confidencemap"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "rejected_outside_hours",
+              "recorded"
+            ],
+            "title": "Action"
+          },
+          "task": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "live",
+              "replay"
+            ],
+            "title": "Mode"
+          },
+          "route": {
+            "type": "string",
+            "title": "Route"
+          },
+          "latencyMs": {
+            "type": "number",
+            "title": "Latencyms"
+          },
+          "inputTokens": {
+            "type": "integer",
+            "title": "Inputtokens"
+          }
+        },
+        "type": "object",
+        "required": [
+          "decisionId",
+          "interactionId",
+          "customerId",
+          "tier",
+          "answers",
+          "confidenceMap",
+          "action",
+          "task",
+          "policyVersion",
+          "mode",
+          "route",
+          "latencyMs",
+          "inputTokens"
+        ],
+        "title": "ClassifyResponse"
+      },
+      "CustomerOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "displayName": {
+            "type": "string",
+            "title": "Displayname"
+          },
+          "branchId": {
+            "type": "string",
+            "title": "Branchid"
+          },
+          "joinedOn": {
+            "type": "string",
+            "title": "Joinedon"
+          },
+          "tier": {
+            "type": "string",
+            "title": "Tier"
+          },
+          "lastSpend": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastspend"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "displayName",
+          "branchId",
+          "joinedOn",
+          "tier"
+        ],
+        "title": "CustomerOut"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthOut": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ok",
+            "title": "Status",
+            "default": "ok"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "live",
+              "replay",
+              "auto"
+            ],
+            "title": "Mode"
+          },
+          "route": {
+            "type": "string",
+            "title": "Route"
+          },
+          "budgetRemainingTokens": {
+            "type": "integer",
+            "title": "Budgetremainingtokens"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mode",
+          "route",
+          "budgetRemainingTokens",
+          "policyVersion",
+          "version"
+        ],
+        "title": "HealthOut"
+      },
+      "NoulAnswer": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "noul",
+            "title": "Type",
+            "default": "noul"
+          },
+          "noul": {
+            "type": "number",
+            "title": "Noul"
+          }
+        },
+        "type": "object",
+        "required": [
+          "noul"
+        ],
+        "title": "NoulAnswer"
+      },
+      "SampleInteraction": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "customerId": {
+            "type": "string",
+            "title": "Customerid"
+          },
+          "branchId": {
+            "type": "string",
+            "title": "Branchid"
+          },
+          "channel": {
+            "type": "string",
+            "title": "Channel"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "receivedAt": {
+            "type": "string",
+            "title": "Receivedat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "customerId",
+          "branchId",
+          "channel",
+          "text",
+          "receivedAt"
+        ],
+        "title": "SampleInteraction"
+      },
+      "ScoreAnswer": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "score",
+            "title": "Type",
+            "default": "score"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "probabilities": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Probabilities"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "confidence_is_fallback": {
+            "type": "boolean",
+            "title": "Confidence Is Fallback",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "score",
+          "probabilities",
+          "confidence"
+        ],
+        "title": "ScoreAnswer"
+      },
+      "TaskListItem": {
+        "properties": {
+          "decisionId": {
+            "type": "string",
+            "title": "Decisionid"
+          },
+          "interactionId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interactionid"
+          },
+          "customerId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customerid"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "createdAt": {
+            "type": "string",
+            "title": "Createdat"
+          }
+        },
+        "type": "object",
+        "required": [
+          "decisionId",
+          "interactionId",
+          "customerId",
+          "type",
+          "status",
+          "createdAt"
+        ],
+        "title": "TaskListItem"
+      },
+      "TaskOut": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "booking_request",
+            "title": "Type",
+            "default": "booking_request"
+          },
+          "status": {
+            "type": "string",
+            "const": "confirmed",
+            "title": "Status",
+            "default": "confirmed"
+          }
+        },
+        "type": "object",
+        "title": "TaskOut"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

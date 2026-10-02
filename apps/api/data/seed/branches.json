@@ -1,0 +1,29 @@
+[
+  {
+    "id": "b_lakeview",
+    "name": "Lakeview",
+    "city": "Hyderabad",
+    "openingHours": [
+      "10:00",
+      "20:00"
+    ]
+  },
+  {
+    "id": "b_techpark",
+    "name": "Tech Park",
+    "city": "Hyderabad",
+    "openingHours": [
+      "10:00",
+      "20:00"
+    ]
+  },
+  {
+    "id": "b_oldtown",
+    "name": "Old Town",
+    "city": "Hyderabad",
+    "openingHours": [
+      "10:00",
+      "20:00"
+    ]
+  }
+]

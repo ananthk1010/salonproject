@@ -1,0 +1,86 @@
+[
+  {
+    "id": "c_001",
+    "displayName": "Anita R.",
+    "phoneMasked": "9xxxxxxx12",
+    "branchId": "b_lakeview",
+    "joinedOn": "2024-03-10"
+  },
+  {
+    "id": "c_002",
+    "displayName": "Kiran S.",
+    "phoneMasked": "9xxxxxxx34",
+    "branchId": "b_techpark",
+    "joinedOn": "2025-07-22"
+  },
+  {
+    "id": "c_003",
+    "displayName": "Meera P.",
+    "phoneMasked": "9xxxxxxx56",
+    "branchId": "b_oldtown",
+    "joinedOn": "2025-11-02"
+  },
+  {
+    "id": "c_004",
+    "displayName": "Ravi K.",
+    "phoneMasked": "9xxxxxxx78",
+    "branchId": "b_lakeview",
+    "joinedOn": "2026-01-15"
+  },
+  {
+    "id": "c_005",
+    "displayName": "Divya N.",
+    "phoneMasked": "9xxxxxxx90",
+    "branchId": "b_techpark",
+    "joinedOn": "2026-09-20"
+  },
+  {
+    "id": "c_006",
+    "displayName": "Suresh B.",
+    "phoneMasked": "9xxxxxxx11",
+    "branchId": "b_oldtown",
+    "joinedOn": "2023-05-01"
+  },
+  {
+    "id": "c_007",
+    "displayName": "Lakshmi V.",
+    "phoneMasked": "9xxxxxxx22",
+    "branchId": "b_lakeview",
+    "joinedOn": "2025-02-14"
+  },
+  {
+    "id": "c_008",
+    "displayName": "Arjun T.",
+    "phoneMasked": "9xxxxxxx33",
+    "branchId": "b_techpark",
+    "joinedOn": "2025-08-08"
+  },
+  {
+    "id": "c_009",
+    "displayName": "Priya M.",
+    "phoneMasked": "9xxxxxxx44",
+    "branchId": "b_oldtown",
+    "joinedOn": "2026-02-02"
+  },
+  {
+    "id": "c_010",
+    "displayName": "Vikram J.",
+    "phoneMasked": "9xxxxxxx55",
+    "branchId": "b_lakeview",
+    "joinedOn": "2024-12-25"
+  },
+  {
+    "id": "c_011",
+    "displayName": "Sneha D.",
+    "phoneMasked": "9xxxxxxx66",
+    "branchId": "b_techpark",
+    "joinedOn": "2025-04-18"
+  },
+  {
+    "id": "c_012",
+    "displayName": "Farah A.",
+    "phoneMasked": "9xxxxxxx77",
+    "branchId": "b_oldtown",
+    "joinedOn": "2026-06-06"
+  }
+]

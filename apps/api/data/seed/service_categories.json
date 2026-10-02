@@ -1,0 +1,26 @@
+[
+  {
+    "id": "hair",
+    "description": "Haircut, colour, styling, hair spa, keratin or similar hair treatments"
+  },
+  {
+    "id": "skin",
+    "description": "Facials, skin treatments, cleanups"
+  },
+  {
+    "id": "spa_body",
+    "description": "Body massage, spa packages, body treatments"
+  },
+  {
+    "id": "nails",
+    "description": "Manicure, pedicure, nail art"
+  },
+  {
+    "id": "grooming",
+    "description": "Men's grooming, beard or shave services"
+  },
+  {
+    "id": "bridal",
+    "description": "Bridal or event makeup and styling packages"
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "v_001",
+    "customerId": "c_001",
+    "serviceId": "svc_haircolour",
+    "stylistId": "st_priya",
+    "date": "2026-09-08T12:00:00+00:00",
+    "spend": 6200,
+    "noShow": false
+  },
+  {
+    "id": "v_002",
+    "customerId": "c_002",
+    "serviceId": "svc_facial_korean",
+    "stylistId": "st_ravi",
+    "date": "2026-09-15T12:00:00+00:00",
+    "spend": 4200,
+    "noShow": false
+  },
+  {
+    "id": "v_003",
+    "customerId": "c_003",
+    "serviceId": "svc_manicure",
+    "stylistId": "st_divya",
+    "date": "2026-09-19T12:00:00+00:00",
+    "spend": 2200,
+    "noShow": false
+  },
+  {
+    "id": "v_004",
+    "customerId": "c_004",
+    "serviceId": "svc_haircut",
+    "stylistId": "st_priya",
+    "date": "2026-09-24T12:00:00+00:00",
+    "spend": 900,
+    "noShow": false
+  },
+  {
+    "id": "v_005",
+    "customerId": "c_006",
+    "serviceId": "svc_keratin",
+    "stylistId": "st_arjun",
+    "date": "2026-08-30T12:00:00+00:00",
+    "spend": 8000,
+    "noShow": false
+  },
+  {
+    "id": "v_006",
+    "customerId": "c_007",
+    "serviceId": "svc_massage_swedish",
+    "stylistId": "st_divya",
+    "date": "2026-09-22T12:00:00+00:00",
+    "spend": 3800,
+    "noShow": false
+  },
+  {
+    "id": "v_007",
+    "customerId": "c_008",
+    "serviceId": "svc_cleanup",
+    "stylistId": "st_priya",
+    "date": "2026-09-26T12:00:00+00:00",
+    "spend": 1500,
+    "noShow": false
+  },
+  {
+    "id": "v_008",
+    "customerId": "c_009",
+    "serviceId": "svc_body_polish",
+    "stylistId": "st_ravi",
+    "date": "2026-09-17T12:00:00+00:00",
+    "spend": 1501,
+    "noShow": false
+  },
+  {
+    "id": "v_009",
+    "customerId": "c_010",
+    "serviceId": "svc_facial_classic",
+    "stylistId": "st_arjun",
+    "date": "2026-09-20T12:00:00+00:00",
+    "spend": 5000,
+    "noShow": false
+  },
+  {
+    "id": "v_010",
+    "customerId": "c_011",
+    "serviceId": "svc_pedicure",
+    "stylistId": "st_divya",
+    "date": "2026-09-25T12:00:00+00:00",
+    "spend": 5001,
+    "noShow": false
+  },
+  {
+    "id": "v_011",
+    "customerId": "c_012",
+    "serviceId": "svc_bridal",
+    "stylistId": "st_priya",
+    "date": "2026-07-31T12:00:00+00:00",
+    "spend": 3000,
+    "noShow": false
+  }
+]

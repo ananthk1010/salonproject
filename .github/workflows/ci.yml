@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-dev.txt
+      - run: python scripts/generate_seed.py
+      - run: ruff check app tests
+      - run: python -m pytest -q
+
+  eval-replay:
+    needs: api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r apps/api/requirements.txt
+      - run: python apps/api/scripts/generate_seed.py
+      - name: Run the golden-set evaluation in replay mode (no API key, zero cost)
+        run: python lab/jev_eval.py --mode replay
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: |
+            eval/results.json
+            eval/results.md
+
+  contract:
+    needs: api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: pip install -r apps/api/requirements.txt
+      - run: python apps/api/scripts/export_openapi.py
+      - run: npx --yes openapi-typescript packages/contracts/openapi.json -o packages/contracts/src/api.d.ts
+      - name: Fail if the committed contract is stale
+        run: git diff --exit-code packages/contracts
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: apps/web/package-lock.json
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build

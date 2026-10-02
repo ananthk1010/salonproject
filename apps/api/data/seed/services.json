@@ -1,0 +1,107 @@
+[
+  {
+    "id": "svc_haircut",
+    "categoryId": "hair",
+    "name": "Haircut & Style",
+    "durationMin": 45,
+    "priceBand": "rs_500_1000"
+  },
+  {
+    "id": "svc_haircolour",
+    "categoryId": "hair",
+    "name": "Hair Colour",
+    "durationMin": 90,
+    "priceBand": "rs_2000_4000"
+  },
+  {
+    "id": "svc_hairspa",
+    "categoryId": "hair",
+    "name": "Hair Spa",
+    "durationMin": 60,
+    "priceBand": "rs_1500_2500"
+  },
+  {
+    "id": "svc_keratin",
+    "categoryId": "hair",
+    "name": "Keratin Treatment",
+    "durationMin": 150,
+    "priceBand": "rs_5000_8000"
+  },
+  {
+    "id": "svc_facial_classic",
+    "categoryId": "skin",
+    "name": "Classic Facial",
+    "durationMin": 45,
+    "priceBand": "rs_1000_1500"
+  },
+  {
+    "id": "svc_facial_korean",
+    "categoryId": "skin",
+    "name": "Korean Glass Facial",
+    "durationMin": 60,
+    "priceBand": "rs_2500_3500"
+  },
+  {
+    "id": "svc_cleanup",
+    "categoryId": "skin",
+    "name": "Cleanup",
+    "durationMin": 30,
+    "priceBand": "rs_600_900"
+  },
+  {
+    "id": "svc_massage_swedish",
+    "categoryId": "spa_body",
+    "name": "Swedish Massage",
+    "durationMin": 60,
+    "priceBand": "rs_2000_3000"
+  },
+  {
+    "id": "svc_body_polish",
+    "categoryId": "spa_body",
+    "name": "Body Polish",
+    "durationMin": 60,
+    "priceBand": "rs_2500_3500"
+  },
+  {
+    "id": "svc_manicure",
+    "categoryId": "nails",
+    "name": "Manicure",
+    "durationMin": 30,
+    "priceBand": "rs_400_700"
+  },
+  {
+    "id": "svc_pedicure",
+    "categoryId": "nails",
+    "name": "Pedicure",
+    "durationMin": 45,
+    "priceBand": "rs_500_900"
+  },
+  {
+    "id": "svc_nailart",
+    "categoryId": "nails",
+    "name": "Nail Art",
+    "durationMin": 30,
+    "priceBand": "rs_300_800"
+  },
+  {
+    "id": "svc_beard",
+    "categoryId": "grooming",
+    "name": "Beard Trim",
+    "durationMin": 20,
+    "priceBand": "rs_150_300"
+  },
+  {
+    "id": "svc_mens_haircut",
+    "categoryId": "grooming",
+    "name": "Men's Haircut",
+    "durationMin": 30,
+    "priceBand": "rs_300_500"
+  },
+  {
+    "id": "svc_bridal",
+    "categoryId": "bridal",
+    "name": "Bridal Makeup Package",
+    "durationMin": 180,
+    "priceBand": "rs_8000_15000"
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "questions_hash": "4daadad99183",
+  "route": "fixture",
+  "usage": {
+    "input_tokens": 986,
+    "output_tokens": 18
+  },
+  "answers": {
+    "intent": {
+      "type": "choice",
+      "choice": "reschedule",
+      "probabilities": {
+        "book_appointment": 0.0233,
+        "cancel": 0.0233,
+        "price_enquiry": 0.0233,
+        "complaint": 0.0233,
+        "feedback": 0.0233,
+        "other": 0.0233,
+        "reschedule": 0.8602
+      },
+      "confidence": 0.8369,
+      "confidence_is_fallback": false
+    },
+    "service_category": {
+      "type": "choice",
+      "choice": "nails",
+      "probabilities": {
+        "hair": 0.0367,
+        "skin": 0.0367,
+        "spa_body": 0.0367,
+        "grooming": 0.0367,
+        "bridal": 0.0367,
+        "unclear": 0.0367,
+        "nails": 0.7798
+      },
+      "confidence": 0.7431000000000001,
+      "confidence_is_fallback": false
+    },
+    "urgency": {
+      "type": "score",
+      "score": 1.0,
+      "probabilities": {
+        "0": 0.0667,
+        "1": 0.8,
+        "2": 0.0667,
+        "3": 0.0667
+      },
+      "confidence": 0.7333333333333334,
+      "confidence_is_fallback": false
+    },
+    "frustration": {
+      "type": "score",
+      "score": 0.0,
+      "probabilities": {
+        "0": 0.8,
+        "1": 0.1,
+        "2": 0.1
+      },
+      "confidence": 0.7000000000000002,
+      "confidence_is_fallback": false
+    },
+    "wants_specific_stylist": {
+      "type": "noul",
+      "noul": 0.04
+    },
+    "wants_callback": {
+      "type": "noul",
+      "noul": 0.04
+    }
+  }
+}

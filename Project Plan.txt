@@ -1,0 +1,70 @@
+You are my senior software architect, AI engineer, product mentor, and technical writing coach.
+
+I want to learn, build, deploy, and publicly showcase an experimental salon-management application called “ABC-Salon”. The project is primarily for learning and portfolio development, but it should be implemented with professional engineering practices so that I can demonstrate it on LinkedIn.
+
+The project should include:
+
+1. An immediately viewable interactive demo.
+2. A concise technical whitepaper.
+3. A public source-code repository.
+4. Clear architecture and workflow documentation.
+5. A deployment that can be accessed through a shareable URL.
+6. A LinkedIn-ready project description and showcase post.
+
+Use “salon” terminology throughout the project. You may use generic salon concepts or take inspiration from the public website https://www.eleggancespa.com/ for service categories, customer experience, branches, and appointment-related terminology. Do not copy private, copyrighted, or proprietary content. The reference salon website describes a premium spa and salon experience with curated treatments, multiple locations, and appointment-oriented customer interactions.
+
+## Primary learning objective
+
+The main learning objective for Phase 1 is to understand and demonstrate the usage of Jev from TypeSafe AI:
+
+https://docs.typesafe.ai/introduction
+
+According to the documentation, Jev evaluates typed questions against a supplied state and returns structured results such as choices, scores, probabilities, and confidence. It is intended for software-consumable decisions rather than free-form text generation.
+
+I want to use Jev for customer classification and workflow automation. The implementation should demonstrate why structured, typed AI decisions can be useful in an application workflow.
+
+Do not assume that Jev should replace all traditional machine-learning components. Explicitly compare possible approaches and recommend where Jev is appropriate, where conventional machine learning is appropriate, and where deterministic business rules are preferable.
+
+I also heard about the Amazon Mitra v2 model for customer classification. Investigate whether Mitra v2 is relevant and available for this use case. Do not assume its capabilities, licensing, access method, or suitability without verification. If the model is not suitable, unavailable, or unnecessary, explain why and propose an alternative.
+
+I also heard Strands Harness is a new, general-purpose open-source AI agent harness launched by Amazon Web Services (AWS) in September 2026. It is designed to act as a ready-made, fully assembled environment that allows developers to run autonomous AI agents with just a single line of code, bypassing the complex task of wiring up backend tools, memory, and context loops from scratch.
+
+Phased-Objectives:
+## Phase 1: Customer Classification and Jev Demonstration
+## Phase 2: Receptionist-Assisted Appointment Booking
+- Do not implement Phase 2 until Phase 1 is complete and documented. First provide an architecture and learning plan for it. In Phase 2, a customer calls a salon manager or receptionist. The receptionist should be able to create an appointment in ABC-Salon. Use mock or sandbox integrations initially. Do not send real WhatsApp messages without explicit confirmation and appropriate credentials.
+## Phase 3: Customer Self-Service Booking
+- In Phase 3, the customer receives a WhatsApp message containing a booking URL and completes the booking independently.
+## Phase-4: Future. Will update later.
+
+
+I would think the following, let me know the trade-offs.
+
+Frontend: Next.js + TypeScript
+Backend: Python + FastAPI
+Agent layer: Strands Harness
+Structured decision layer: Jev
+Validation: Pydantic
+Frontend/backend contract: OpenAPI-generated TypeScript types or shared schema
+Deployment: Docker initially
+Hosting: Hugging Face Docker Space
+
+Give me a plan for Phase-1 now. Feel free to propose whatever is best.
+===========================================================================
+[30-Sep-2026]
+Am a little confused with rules/policy. I would prefer the following rules:
+a) tier=gold; if the customers last spend range is [5001-10000] rupees.
+b) tier=silver; if the customers last spend range is [3001-5000] rupees.
+c) tier=bronze; if the customers last spend range is [1501-3000] rupees.
+d) tier=copper; if the customers last spend range is < 1500 rupees.
+e) tier=new; if the customers record is not found in the DB.
+
+W.r.t Policy:
+To keep it simple for now, since in phase-1 objective is to showcase Jev, for Policy just have the below:
+
+a) If booking time is > 10AM and less than 8PM, confirm the booking. 
+
+When we move to phase-2 i would add better policies. Feel free to propose if you have any suggestion.
+
+
+

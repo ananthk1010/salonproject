@@ -10,6 +10,14 @@ Third-party reports say direct signups were paused on 2026-09-22, shortly
 after a brief open period; no reopening date is published. Phase 1 cannot
 wait indefinitely for that to change.
 
+Update, 2026-10-03: direct console access is open again, but the owner
+reports that the $5 credit is offered only to organizations with a GST
+registration, not to individual accounts. Direct access therefore gives
+the owner no cost advantage, so the decision below stands unchanged.
+Switching later, if TypeSafe extends credits to individuals, is a
+configuration change only (`JEV_BASE_URL=https://api.typesafe.ai`,
+`JEV_MODEL=jev-latest`, and a TypeSafe key in `JEV_API_KEY`).
+
 ## Decision
 
 Call Jev through Vercel AI Gateway's TypeSafe-compatible endpoint:

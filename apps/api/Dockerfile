@@ -28,5 +28,7 @@ ENV FIXTURES_DIR=/app/fixtures
 RUN chown -R appuser:appuser /app
 USER appuser
 
+# Render tells the container which port to bind through $PORT (default 10000).
+# Locally and in docker-compose it falls back to 8000.
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

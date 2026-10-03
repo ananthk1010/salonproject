@@ -49,8 +49,8 @@ SERVICES = [
     {"id": "svc_facial_classic", "categoryId": "skin", "name": "Classic Facial", "durationMin": 45, "priceBand": "rs_1000_1500"},
     {"id": "svc_facial_korean", "categoryId": "skin", "name": "Korean Glass Facial", "durationMin": 60, "priceBand": "rs_2500_3500"},
     {"id": "svc_cleanup", "categoryId": "skin", "name": "Cleanup", "durationMin": 30, "priceBand": "rs_600_900"},
-    {"id": "svc_massage_swedish", "categoryId": "spa_body", "name": "Swedish Massage", "durationMin": 60, "priceBand": "rs_2000_3000"},
-    {"id": "svc_body_polish", "categoryId": "spa_body", "name": "Body Polish", "durationMin": 60, "priceBand": "rs_2500_3500"},
+    {"id": "svc_massage_swedish", "categoryId": "spa_therapy", "name": "Swedish Massage", "durationMin": 60, "priceBand": "rs_2000_3000"},
+    {"id": "svc_body_polish", "categoryId": "spa_therapy", "name": "Body Polish", "durationMin": 60, "priceBand": "rs_2500_3500"},
     {"id": "svc_manicure", "categoryId": "nails", "name": "Manicure", "durationMin": 30, "priceBand": "rs_400_700"},
     {"id": "svc_pedicure", "categoryId": "nails", "name": "Pedicure", "durationMin": 45, "priceBand": "rs_500_900"},
     {"id": "svc_nailart", "categoryId": "nails", "name": "Nail Art", "durationMin": 30, "priceBand": "rs_300_800"},
@@ -187,7 +187,7 @@ _INTERACTIONS_RAW = [
 
     ("i_015", "c_002", "b_techpark", "web_form",
      "I'd like to book a spa package but have a few questions, could someone call me back?",
-     _dt(0, 13, 45), "book_appointment", "spa_body", 1, 0, False, True),
+     _dt(0, 13, 45), "book_appointment", "spa_therapy", 1, 0, False, True),
 
     ("i_016", "c_004", "b_lakeview", "phone_note",
      "This is the third time my appointment got cancelled last minute, very disappointed in this salon.",
@@ -195,7 +195,7 @@ _INTERACTIONS_RAW = [
 
     ("i_017", "c_007", "b_lakeview", "whatsapp_mock",
      "Hi, can you reschedule my massage booking? Sending this quite late, apologies.",
-     _dt(0, 22, 10), "reschedule", "spa_body", 1, 0, False, False),
+     _dt(0, 22, 10), "reschedule", "spa_therapy", 1, 0, False, False),
 
     ("i_018", "c_010", "b_lakeview", "phone_note",
      "hi can i come today",

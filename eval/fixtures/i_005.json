@@ -1,5 +1,5 @@
 {
-  "questions_hash": "4daadad99183",
+  "questions_hash": "eb96ec687453",
   "route": "fixture",
   "usage": {
     "input_tokens": 986,
@@ -27,7 +27,7 @@
       "probabilities": {
         "hair": 0.0367,
         "skin": 0.0367,
-        "spa_body": 0.0367,
+        "spa_therapy": 0.0367,
         "grooming": 0.0367,
         "bridal": 0.0367,
         "unclear": 0.0367,

@@ -50,14 +50,14 @@
   },
   {
     "id": "svc_massage_swedish",
-    "categoryId": "spa_body",
+    "categoryId": "spa_therapy",
     "name": "Swedish Massage",
     "durationMin": 60,
     "priceBand": "rs_2000_3000"
   },
   {
     "id": "svc_body_polish",
-    "categoryId": "spa_body",
+    "categoryId": "spa_therapy",
     "name": "Body Polish",
     "durationMin": 60,
     "priceBand": "rs_2500_3500"

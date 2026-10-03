@@ -40,20 +40,20 @@ class NoulQuestion(BaseModel):
 Question = ChoiceQuestion | ScoreQuestion | NoulQuestion
 
 INTENT_CRITERIA = {
-    "book_appointment": "Wants to schedule a new salon visit",
-    "reschedule": "Wants to move an existing booking to a different time",
-    "cancel": "Wants to cancel an existing booking",
-    "price_enquiry": "Asking about prices, offers, or what a service costs",
-    "complaint": "Expressing dissatisfaction with a past visit or service",
-    "feedback": "Giving feedback or a compliment, not asking for action",
+    "book_appointment": "Wants to schedule a salon visit",
+    "reschedule": "Wants to move a confirmed booking to a different time",
+    "cancel": "Wants to cancel a confirmed booking",
+    "price_enquiry": "Asking about prices, offers, or cost of a service",
+    "complaint": "Expressing dissatisfaction with a past visit or a service",
+    "feedback": "Giving feedback or a compliment, not asking for any action",
     "other": "Does not fit any of the above",
 }
 
 SERVICE_CATEGORY_CRITERIA = {
-    "hair": "Haircut, colour, styling, hair spa, keratin or similar hair treatments",
+    "hair": "Haircut, Hair-Color, Hair-styling, Hair spa, Keratin or similar hair services",
     "skin": "Facials, skin treatments, cleanups",
-    "spa_body": "Body massage, spa packages, body treatments",
-    "nails": "Manicure, pedicure, nail art",
+    "spa_therapy": "Body massage, spa packages, body treatments",
+    "nails": "Manicure, pedicure, nail-polish",
     "grooming": "Men's grooming, beard or shave services",
     "bridal": "Bridal or event makeup and styling packages",
     "unclear": "The message does not specify or imply a service category",

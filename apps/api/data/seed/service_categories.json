@@ -1,19 +1,19 @@
 [
   {
     "id": "hair",
-    "description": "Haircut, colour, styling, hair spa, keratin or similar hair treatments"
+    "description": "Haircut, Hair-Color, Hair-styling, Hair spa, Keratin or similar hair services"
   },
   {
     "id": "skin",
     "description": "Facials, skin treatments, cleanups"
   },
   {
-    "id": "spa_body",
+    "id": "spa_therapy",
     "description": "Body massage, spa packages, body treatments"
   },
   {
     "id": "nails",
-    "description": "Manicure, pedicure, nail art"
+    "description": "Manicure, pedicure, nail-polish"
   },
   {
     "id": "grooming",

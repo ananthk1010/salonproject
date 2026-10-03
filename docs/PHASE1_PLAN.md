@@ -128,7 +128,7 @@ Generic concepts: service menu grouped by hair, skin, spa/body, and treatments; 
 | Customer tier: new / copper / bronze / silver / gold, by last visit spend in ₹ (see 4.1) | Deterministic rule | Exact numeric thresholds the owner specified directly. Auditable and always correct; running this through a model would add cost and uncertainty for no benefit — the textbook case for a rule, not AI |
 | Branch opening hours | Deterministic rule (fact) | 10:00–20:00 for all three branches in Phase 1 seed data |
 | Intent of an incoming message (book_appointment, reschedule, cancel, price_enquiry, complaint, feedback, other) | Jev `choice` | Free-text judgement needing probabilities; the only Jev output Phase 1's policy actually consumes |
-| Service category requested (hair, skin, spa_body, nails, grooming, bridal, unclear) | Jev `choice` | Free-text judgement; shown and audited, not consumed by policy in Phase 1 |
+| Service category requested (hair, skin, spa_therapy, nails, grooming, bridal, unclear) | Jev `choice` | Free-text judgement; shown and audited, not consumed by policy in Phase 1 |
 | Urgency (4 levels) and frustration (3 levels) | Jev `score` | Ordinal judgement; shown and audited, not consumed by policy in Phase 1 |
 | Asks for a specific stylist; asks for a callback | Jev `noul` | Cheap speculative questions; shown and audited, not consumed by policy in Phase 1 |
 | Churn risk from visit history (tabular) | Conventional ML (logistic regression; Mitra-v2 zero-shot as comparator) | Labelled numeric history is what tabular ML is for; Jev on the same rows is the counter-experiment. Lab only, does not touch the deployed app |
@@ -197,7 +197,7 @@ Persistence note: Render Free disks are ephemeral, so the audit store resets on 
 ## 6. Data model (Phase 1 subset)
 
 - Branch: id, name (fictional: Lakeview, Tech Park, Old Town), city, openingHours (10:00–20:00)
-- ServiceCategory: hair, skin, spa_body, nails, grooming, bridal
+- ServiceCategory: hair, skin, spa_therapy, nails, grooming, bridal
 - Service: id, categoryId, name, durationMin, priceBand
 - Customer: id, displayName, phoneMasked, branchId, joinedOn, tier (new | copper | bronze | silver | gold, computed by the rule in 4.1, not stored redundantly if derivable from visits)
 - Visit: id, customerId, serviceId, stylistId, date, spend (₹), noShow

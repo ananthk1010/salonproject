@@ -75,7 +75,7 @@ export default function Home() {
       <footer className="app-footer">
         Learning and portfolio project. All customer data is synthetic. Not affiliated with any
         salon business. See the{" "}
-        <a href="https://github.com/ananthk1010/abc-salon" target="_blank" rel="noreferrer">
+        <a href="https://github.com/ananthk1010/salonproject" target="_blank" rel="noreferrer">
           source repository
         </a>{" "}
         for the architecture and whitepaper.

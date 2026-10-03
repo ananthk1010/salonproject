@@ -6,7 +6,9 @@ import type {
   TaskListItem,
 } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8010";
+// Strip any trailing slash so a pasted "https://host/" does not turn every
+// request into "https://host//api/..." (which the API answers with 404).
+const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8010").replace(/\/+$/, "");
 
 class ApiError extends Error {
   status: number;

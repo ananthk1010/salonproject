@@ -257,7 +257,9 @@ export interface components {
              * Mode
              * @enum {string}
              */
-            mode: "live" | "replay" | "auto";
+            mode: "live" | "replay";
+            /** Reason */
+            reason?: ("forced_replay" | "no_key" | "budget_exhausted") | null;
             /** Route */
             route: string;
             /** Budgetremainingtokens */

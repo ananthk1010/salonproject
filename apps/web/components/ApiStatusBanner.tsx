@@ -49,9 +49,21 @@ export function ApiStatusBanner({ waking }: { waking: boolean }) {
   return null;
 }
 
+const REPLAY_REASON_TEXT: Record<string, string> = {
+  forced_replay: "Replay is forced by the server's JEV_MODE setting.",
+  no_key: "No Jev API key is configured on the server.",
+  budget_exhausted: "Today's Jev token budget is used up.",
+};
+
 export function ModeBadge({ health }: { health: HealthOut | null }) {
   if (!health) return <span className="badge down">checking…</span>;
-  const cls = health.mode === "live" ? "live" : "replay";
-  const label = health.mode === "live" ? "LIVE — calling Jev" : "REPLAY — fixtures, no cost";
-  return <span className={`badge ${cls}`}>{label}</span>;
+  const live = health.mode === "live";
+  const title = live
+    ? "New classifications call Jev. If a call fails, that one result falls back to a recorded answer and is labelled mode: replay."
+    : (health.reason && REPLAY_REASON_TEXT[health.reason]) || "Serving recorded answers.";
+  return (
+    <span className={`badge ${live ? "live" : "replay"}`} title={title}>
+      {live ? "LIVE — calling Jev" : "REPLAY — fixtures, no cost"}
+    </span>
+  );
 }

@@ -78,7 +78,8 @@ export type TaskListItem = {
 
 export type HealthOut = {
   status: "ok";
-  mode: "live" | "replay" | "auto";
+  mode: "live" | "replay";
+  reason?: "forced_replay" | "no_key" | "budget_exhausted" | null;
   route: string;
   budgetRemainingTokens: number;
   policyVersion: string;

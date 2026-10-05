@@ -11,6 +11,7 @@ from app.audit.store import AuditStore
 from app.config import Settings
 from app.jev.answers import ChoiceAnswer, JevAnswers, ScoreAnswer
 from app.jev.client import JevClient, JevUpstreamError
+from app.jev.mode import resolve_mode
 from app.jev.questions import questions_payload
 from app.jev.replay import ReplayStore
 from app.jev.state_builder import assert_no_pii, build_state
@@ -124,12 +125,9 @@ class ClassifyService:
         )
 
     def _get_answers(self, state: dict, replay_key: str) -> JevAnswers:
-        force_replay = self.settings.jev_mode == "replay"
-        have_key = bool(self.settings.jev_api_key)
-        under_budget = self.audit_store.daily_tokens_used() < self.settings.daily_budget_tokens
-        allow_live = (not force_replay) and self.settings.jev_mode in ("auto", "live") and have_key and under_budget
+        decision = resolve_mode(self.settings, self.audit_store.daily_tokens_used())
 
-        if allow_live:
+        if decision.mode == "live":
             try:
                 return self.jev_client.evaluate(state)
             except JevUpstreamError:

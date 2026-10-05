@@ -7,7 +7,8 @@ from pydantic import BaseModel
 
 class HealthOut(BaseModel):
     status: Literal["ok"] = "ok"
-    mode: Literal["live", "replay", "auto"]
+    mode: Literal["live", "replay"]
+    reason: Literal["forced_replay", "no_key", "budget_exhausted"] | None = None
     route: str
     budgetRemainingTokens: int
     policyVersion: str

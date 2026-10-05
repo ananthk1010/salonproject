@@ -512,10 +512,25 @@
             "type": "string",
             "enum": [
               "live",
-              "replay",
-              "auto"
+              "replay"
             ],
             "title": "Mode"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "forced_replay",
+                  "no_key",
+                  "budget_exhausted"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
           },
           "route": {
             "type": "string",

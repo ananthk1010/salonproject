@@ -68,6 +68,10 @@ export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
       </div>
     );
   }
+  
+  const entries = Object.entries(result.answers);
+  const policyEntries = entries.filter(([id]) => POLICY_RELEVANT.has(id));
+  const otherEntries = entries.filter(([id]) => !POLICY_RELEVANT.has(id));
 
   return (
     <div className="card">
@@ -76,18 +80,26 @@ export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
         <span className={`tier-pill ${result.tier}`}>{result.tier}</span>{" "}
         customer tier — computed by a deterministic rule, never by Jev.
       </p>
+
       <div className={`outcome ${result.action}`}>{OUTCOME_LABEL[result.action]}</div>
 
-      {Object.entries(result.answers).map(([id, answer]) => (
-        <div key={id} style={{ opacity: POLICY_RELEVANT.has(id) ? 1 : 0.85 }}>
+      {policyEntries.map(([id, answer]) => (
+        <div key={id}>
           <AnswerRow id={id} answer={answer} />
-          {POLICY_RELEVANT.has(id) && (
-            <p style={{ marginTop: -8, marginBottom: 12, fontSize: 11, color: "#2f8f4e" }}>
-              ↳ this is the only answer Phase 1&apos;s policy reads
-            </p>
-          )}
+          <p style={{ marginTop: -8, marginBottom: 12, fontSize: 11, color: "#2f8f4e" }}>
+            ↳ this is the only answer Phase 1&apos;s policy reads
+          </p>
         </div>
       ))}
+
+      <details>
+        <summary style={{ cursor: "pointer", fontSize: 13, margin: "8px 0" }}>
+          Other Jev answers (shown for the demo, not used by policy)
+        </summary>
+        {otherEntries.map(([id, answer]) => (
+          <AnswerRow key={id} id={id} answer={answer} />
+        ))}
+      </details>
 
       <div className="meta-row">
         <span>mode: {result.mode}</span>
@@ -97,4 +109,4 @@ export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
       </div>
     </div>
   );
-}
+};

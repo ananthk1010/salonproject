@@ -290,3 +290,39 @@ footer.app-footer {
   color: var(--muted);
   text-align: center;
 }
+
+.phase-note {
+  background: #eaf1fb;
+  border: 1px solid #c9daf2;
+  color: var(--navy);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.answer-group {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.answer-group h3 {
+  margin: 0 0 2px;
+  font-size: 13px;
+  color: var(--navy);
+}
+
+.group-blurb {
+  margin: 0 0 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.row-tag {
+  margin: -6px 0 12px;
+  font-size: 11px;
+}
+
+.row-tag.drives { color: var(--green); font-weight: 600; }
+.row-tag.display { color: var(--muted); }

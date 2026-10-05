@@ -59,6 +59,26 @@ function AnswerRow({ id, answer }: { id: string; answer: Answer }) {
 
 const POLICY_RELEVANT = new Set(["intent"]);
 
+// Jev has exactly three question types. The panel groups answers by type so a
+// reader can see all three, and marks which single answer the policy reads.
+const GROUPS: { type: Answer["type"]; title: string; blurb: string }[] = [
+  {
+    type: "choice",
+    title: "Choice questions",
+    blurb: "Jev picks one option from a list and gives a probability for every option.",
+  },
+  {
+    type: "score",
+    title: "Score questions",
+    blurb: "Jev places the message on an ordered scale (0 is the lowest level) with a probability for every level.",
+  },
+  {
+    type: "noul",
+    title: "Noul (yes/no) questions",
+    blurb: "Jev gives the probability that a statement is true. There is no confidence value for these.",
+  },
+];
+
 export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
   if (!result) {
     return (
@@ -68,10 +88,8 @@ export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
       </div>
     );
   }
-  
+
   const entries = Object.entries(result.answers);
-  const policyEntries = entries.filter(([id]) => POLICY_RELEVANT.has(id));
-  const otherEntries = entries.filter(([id]) => !POLICY_RELEVANT.has(id));
 
   return (
     <div className="card">
@@ -83,23 +101,32 @@ export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
 
       <div className={`outcome ${result.action}`}>{OUTCOME_LABEL[result.action]}</div>
 
-      {policyEntries.map(([id, answer]) => (
-        <div key={id}>
-          <AnswerRow id={id} answer={answer} />
-          <p style={{ marginTop: -8, marginBottom: 12, fontSize: 11, color: "#2f8f4e" }}>
-            ↳ this is the only answer Phase 1&apos;s policy reads
-          </p>
-        </div>
-      ))}
+      <div className="phase-note">
+        <strong>Phase 1 focuses on Intent.</strong> It is the only Jev answer the policy acts on.
+        The other five are shown to demonstrate Jev&apos;s three question types and are stored in
+        the audit trail.
+      </div>
 
-      <details>
-        <summary style={{ cursor: "pointer", fontSize: 13, margin: "8px 0" }}>
-          Other Jev answers (shown for the demo, not used by policy)
-        </summary>
-        {otherEntries.map(([id, answer]) => (
-          <AnswerRow key={id} id={id} answer={answer} />
-        ))}
-      </details>
+      {GROUPS.map((group) => {
+        const items = entries.filter(([, answer]) => answer.type === group.type);
+        if (items.length === 0) return null;
+        return (
+          <section className="answer-group" key={group.type}>
+            <h3>{group.title}</h3>
+            <p className="group-blurb">{group.blurb}</p>
+            {items.map(([id, answer]) => (
+              <div key={id}>
+                <AnswerRow id={id} answer={answer} />
+                {POLICY_RELEVANT.has(id) ? (
+                  <p className="row-tag drives">↳ drives Phase 1&apos;s policy</p>
+                ) : (
+                  <p className="row-tag display">↳ display only, not used by policy</p>
+                )}
+              </div>
+            ))}
+          </section>
+        );
+      })}
 
       <div className="meta-row">
         <span>mode: {result.mode}</span>
@@ -109,4 +136,4 @@ export function DecisionPanel({ result }: { result: ClassifyResponse | null }) {
       </div>
     </div>
   );
-};
+}
